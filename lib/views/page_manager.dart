@@ -1,5 +1,4 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portofolio_app/Views/home_page.dart';
 import 'package:portofolio_app/Views/perfil_page.dart';

@@ -1,9 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class ElevatedCard extends StatelessWidget {
   final double cardSize;
+  final String title;
+  final String imgPath;
 
-  const ElevatedCard(this.cardSize, {super.key});
+  const ElevatedCard(this.title, this.imgPath, this.cardSize, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +19,51 @@ class ElevatedCard extends StatelessWidget {
         ),
         borderRadius: const BorderRadius.all(Radius.circular(50)),
       ),
-      child: SizedBox(
-        width: cardSize,
-        height: cardSize,
-        child: const Center(child: Text('Elevated Card')),
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
+              image: DecorationImage(
+                image: AssetImage(imgPath),
+                fit: BoxFit.cover,
+              ),
+            ),
+            width: cardSize,
+            height: cardSize,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(5.0, 5.0),
+                              blurRadius: 3.0,
+                              color: Color.fromARGB(150, 0, 0, 0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

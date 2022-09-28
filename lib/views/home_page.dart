@@ -51,7 +51,6 @@ class HomePage extends StatelessWidget {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  margin: const EdgeInsets.symmetric(vertical: 50),
                   child: Wrap(
                     runSpacing: 50,
                     spacing: 50,
@@ -62,24 +61,24 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            child: const Text(
-                              'My Portofolio\n',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          const Text(
+                            'My Portofolio\n',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
                           ),
                           Wrap(
                             spacing: 20,
                             runSpacing: 20,
                             children: [
-                              ElevatedCard(cardSize),
-                              ElevatedCard(cardSize),
-                              ElevatedCard(cardSize),
-                              ElevatedCard(cardSize),
+                              ElevatedCard('Portfolio\nApp',
+                                  'assets/images/logo.png', cardSize),
+                              ElevatedCard('Swift\nTimer\nApp',
+                                  'assets/images/clock.png', cardSize),
+                              ElevatedCard('IX\nDesign\nWebSite',
+                                  'assets/images/ixdesign.png', cardSize),
                             ],
                           ),
                         ],
