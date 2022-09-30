@@ -42,17 +42,7 @@ class OrientationSwitcher extends StatelessWidget {
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
     return orientation == Orientation.portrait
-        ? Wrap(
-            spacing: 50,
-            runSpacing: 50,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            direction: Axis.vertical,
-            children: children)
-        : Wrap(
-            spacing: 50,
-            runSpacing: 50,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            direction: Axis.horizontal,
-            children: children);
+        ? Column(children: children)
+        : Row(children: children);
   }
 }

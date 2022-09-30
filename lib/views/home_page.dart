@@ -69,17 +69,19 @@ class HomePage extends StatelessWidget {
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Wrap(
-                            spacing: 20,
-                            runSpacing: 20,
-                            children: [
-                              ElevatedCard('Portfolio\nApp',
-                                  'assets/images/logo.png', cardSize),
-                              ElevatedCard('Swift\nTimer\nApp',
-                                  'assets/images/clock.png', cardSize),
-                              ElevatedCard('IX\nDesign\nWebSite',
-                                  'assets/images/ixdesign.png', cardSize),
-                            ],
+                          SizedBox(
+                            height: cardSize,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                ElevatedCard('Portfolio\nApp',
+                                    'assets/images/logo.png', cardSize),
+                                ElevatedCard('Swift\nTimer\nApp',
+                                    'assets/images/clock.png', cardSize),
+                                ElevatedCard('IX\nDesign\nWebSite',
+                                    'assets/images/ixdesign.png', cardSize),
+                              ],
+                            ),
                           ),
                         ],
                       ),
