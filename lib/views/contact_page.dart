@@ -43,7 +43,9 @@ class ContactPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const ContactForm(),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const ContactForm()),
               ],
             ),
           ),

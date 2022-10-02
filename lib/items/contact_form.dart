@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'package:email_validator/email_validator.dart';
+//import 'package:email_validator/email_validator.dart';
+
+import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -48,31 +50,28 @@ class ContactFormState extends State<ContactForm> {
         'origin': 'http://localhost',
         'Content-type': 'application/json',
       },
-      body: json.encode({
-        'service_id': serviceId,
-        'template_id': templateId,
-        'user_id': userId,
-        'template_params': {
-          'user_name': name,
-          'user_email': email,
-          'to_email': 'carlosdmcorreia01@gmail.com',
-          'to_name': 'carlosdmcorreia01',
-          'user_subject': subject,
-          'user_message': message,
-        }
-      }),
+      body: json.encode(
+        {
+          'service_id': serviceId,
+          'template_id': templateId,
+          'user_id': userId,
+          'template_params': {
+            'user_name': name,
+            'user_email': email,
+            'to_email': 'carlosdmcorreia01@gmail.com',
+            'to_name': 'carlosdmcorreia01',
+            'user_subject': subject,
+            'user_message': message,
+          }
+        },
+      ),
     );
 
-    print(response.body);
+    //print(response.body);
   }
 
-  TextFormField createTextFormField(
-      TextEditingController controller,
-      String hintText,
-      int? lenght,
-      int? lines,
-      TextInputType keyboardType,
-      double maxWidth) {
+  TextFormField createTextFormField(TextEditingController controller,
+      String hintText, int? lenght, int? lines, TextInputType keyboardType) {
     return TextFormField(
       maxLength: lenght,
       maxLines: lines,
@@ -81,7 +80,9 @@ class ContactFormState extends State<ContactForm> {
       decoration: InputDecoration(
         filled: true,
         hintText: hintText,
-        constraints: BoxConstraints(maxWidth: maxWidth),
+        isDense: true,
+        contentPadding: EdgeInsets.only(
+            left: 5.0.w, bottom: 1.0.h, top: 1.0.h, right: 5.0.w),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
           borderSide: const BorderSide(
@@ -109,23 +110,23 @@ class ContactFormState extends State<ContactForm> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           createTextFormField(
-              controllerName, 'Name', null, null, TextInputType.text, 1020),
+              controllerName, 'Name', null, null, TextInputType.text),
           const SizedBox(height: 20),
           Wrap(
             children: [
-              createTextFormField(controllerEmail, 'Email', null, null,
-                  TextInputType.text, 500),
+              createTextFormField(
+                  controllerEmail, 'Email', null, null, TextInputType.text),
               const SizedBox(
                 height: 20,
                 width: 20,
               ),
-              createTextFormField(controllerSubject, 'Subject', null, null,
-                  TextInputType.text, 500),
+              createTextFormField(
+                  controllerSubject, 'Subject', null, null, TextInputType.text),
             ],
           ),
           const SizedBox(height: 20),
           createTextFormField(
-              controllerSubject, 'Message', 250, 7, TextInputType.text, 1020),
+              controllerMessage, 'Message', 250, 7, TextInputType.text),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
@@ -150,7 +151,7 @@ class ContactFormState extends State<ContactForm> {
               }
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.black,
+              backgroundColor: Colors.black,
               minimumSize: const Size(1020, 50),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50), // <-- Radius

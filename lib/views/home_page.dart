@@ -52,6 +52,7 @@ class HomePage extends StatelessWidget {
                 Container(
                   alignment: Alignment.center,
                   child: Wrap(
+                    alignment: WrapAlignment.center,
                     runSpacing: 50,
                     spacing: 50,
                     children: [
@@ -72,6 +73,7 @@ class HomePage extends StatelessWidget {
                           SizedBox(
                             height: cardSize,
                             child: ListView(
+                              shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               children: [
                                 ElevatedCard('Portfolio\nApp',

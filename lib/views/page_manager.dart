@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:portofolio_app/Views/home_page.dart';
 import 'package:portofolio_app/Views/perfil_page.dart';
 import 'package:portofolio_app/views/contact_page.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:sizer/sizer.dart';
 
 import '../main.dart';
 
