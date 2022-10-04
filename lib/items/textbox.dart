@@ -12,7 +12,8 @@ class MyTextBox extends Container {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      direction: Axis.vertical,
+      spacing: 20,
+      runSpacing: 0,
       children: [
         Text(
           title,
@@ -32,7 +33,7 @@ class MyTextBox extends Container {
         ),
         Container(
           width: 200,
-          margin: const EdgeInsets.only(left: 20, top: 20),
+          margin: const EdgeInsets.only(left: 20, top: 40),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: SweepGradient(
@@ -59,7 +60,7 @@ class MyTextBox extends Container {
             description,
             textAlign: TextAlign.start,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: FontWeight.normal,
               color: Colors.white,
             ),
@@ -79,8 +80,8 @@ class CircleTextBox extends Container {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
+      width: 50,
+      height: 50,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -105,6 +106,46 @@ class CircleTextBox extends Container {
           ),
         ],
       ),
+    );
+  }
+}
+
+class IconTitleBox extends Container {
+  final IconData myIcon;
+  final String title;
+
+  IconTitleBox(this.myIcon, this.title, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: AlignmentDirectional.topCenter,
+      children: [
+        Icon(
+          myIcon,
+          size: 200,
+          color: const Color.fromARGB(44, 105, 240, 175),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            title,
+            textAlign: TextAlign.left,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 50,
+              fontWeight: FontWeight.w900,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(5.0, 5.0),
+                  blurRadius: 0.0,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -142,7 +183,7 @@ class IconTextBox extends Container {
                 textAlign: TextAlign.start,
                 style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600),
               ),
               Text(
@@ -177,13 +218,13 @@ class CircularProgressTextBox extends Container {
         alignment: AlignmentDirectional.center,
         children: [
           SizedBox(
-            width: 130,
+            width: 100,
             child: Text(
               title,
               textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w300),
             ),
           ),
@@ -241,13 +282,14 @@ class LinearProgressTextBox extends Container {
             title,
             textAlign: TextAlign.left,
             style: const TextStyle(
-                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
           ),
+          const SizedBox(height: 5),
           LinearPercentIndicator(
             alignment: main,
-            width: 200,
+            width: 250,
             animation: true,
-            lineHeight: 20.0,
+            lineHeight: 20,
             animationDuration: 3000,
             percent: percentage / 100,
             center: Text(

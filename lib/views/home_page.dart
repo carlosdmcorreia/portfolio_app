@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portofolio_app/items/cards.dart';
 
-import '../items/avatar.dart';
 import '../items/textbox.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,90 +8,37 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double cardSize = 150;
+    double cardSize = 200;
 
-    return CustomScrollView(
-      shrinkWrap: true,
-      slivers: <Widget>[
-        SliverPadding(
-          padding: const EdgeInsets.all(20.0),
-          sliver: SliverList(
-            delegate: SliverChildListDelegate(
-              <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Welcome',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                            'Carlos Correia',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Avatar('assets/images/myphoto.png', 25)
-                    ],
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    runSpacing: 50,
-                    spacing: 50,
-                    children: [
-                      MyTextBox('Front\nEnd\nDev',
-                          'Joining my design and programming skills I want to be one of the best front-end developers'),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'My Portofolio\n',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: cardSize,
-                            child: ListView(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                ElevatedCard('Portfolio\nApp',
-                                    'assets/images/logo.png', cardSize),
-                                ElevatedCard('Swift\nTimer\nApp',
-                                    'assets/images/clock.png', cardSize),
-                                ElevatedCard('IX\nDesign\nWebSite',
-                                    'assets/images/ixdesign.png', cardSize),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+      children: [
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconTitleBox(Icons.design_services_rounded, 'PORT\n\tFOLIO'),
+              Wrap(
+                spacing: 50,
+                runSpacing: 50,
+                children: [
+                  ElevatedCard('Portfolio\nApp', 'Project Description',
+                      'assets/images/logo.png', cardSize),
+                  ElevatedCard('ToDo\nInTime\nApp', 'Project Description',
+                      'assets/images/clock.png', cardSize),
+                  ElevatedCard('IX\nDesign\nWebSite', 'Project Description',
+                      'assets/images/ixdesign.png', cardSize),
+                ],
+              ),
+            ],
           ),
+        ),
+        Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.symmetric(vertical: 50),
+          child: MyTextBox('Front\nEnd\nDev',
+              'Joining my design and programming skills I want to be one of the best front-end developers'),
         ),
       ],
     );

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 //import 'package:email_validator/email_validator.dart';
 
-import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -44,6 +43,7 @@ class ContactFormState extends State<ContactForm> {
     const userId = 'T5nFQkVsdQwOAIwnG';
 
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    // ignore: unused_local_variable
     final response = await http.post(
       url,
       headers: {
@@ -70,33 +70,61 @@ class ContactFormState extends State<ContactForm> {
     //print(response.body);
   }
 
-  TextFormField createTextFormField(TextEditingController controller,
+  Container createTextFormField(TextEditingController controller, IconData icon,
       String hintText, int? lenght, int? lines, TextInputType keyboardType) {
-    return TextFormField(
-      maxLength: lenght,
-      maxLines: lines,
-      keyboardType: keyboardType,
-      controller: controller,
-      decoration: InputDecoration(
-        filled: true,
-        hintText: hintText,
-        isDense: true,
-        contentPadding: EdgeInsets.only(
-            left: 5.0.w, bottom: 1.0.h, top: 1.0.h, right: 5.0.w),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(
-            width: 0,
-            style: BorderStyle.none,
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 500),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Icon(icon),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(left: 60, right: 30),
+            child: TextFormField(
+              controller: controller,
+              maxLength: lenght,
+              maxLines: lines,
+              keyboardType: keyboardType,
+              keyboardAppearance: Brightness.dark,
+              decoration: InputDecoration(
+                filled: true,
+                icon: null,
+                contentPadding: const EdgeInsets.all(20),
+                hintText: hintText,
+                suffix: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: IconButton(
+                      visualDensity: VisualDensity.compact,
+                      padding: const EdgeInsets.all(0),
+                      icon: const Icon(
+                        Icons.clear,
+                        size: 20,
+                      ),
+                      onPressed: () {
+                        controller.clear();
+                      }),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please fill all fields.';
+                }
+                return null;
+              },
+            ),
+          ),
+        ],
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please fill all fields.';
-        }
-        return null;
-      },
     );
   }
 
@@ -106,30 +134,28 @@ class ContactFormState extends State<ContactForm> {
     return Form(
       key: _formKey,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          createTextFormField(
-              controllerName, 'Name', null, null, TextInputType.text),
-          const SizedBox(height: 20),
-          Wrap(
-            children: [
-              createTextFormField(
-                  controllerEmail, 'Email', null, null, TextInputType.text),
-              const SizedBox(
-                height: 20,
-                width: 20,
-              ),
-              createTextFormField(
-                  controllerSubject, 'Subject', null, null, TextInputType.text),
-            ],
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Wrap(
+              runSpacing: 20,
+              runAlignment: WrapAlignment.center,
+              alignment: WrapAlignment.center,
+              children: <Widget>[
+                createTextFormField(controllerName, Icons.person, 'Name', null,
+                    null, TextInputType.text),
+                createTextFormField(controllerSubject, Icons.title, 'Subject',
+                    null, null, TextInputType.text),
+                createTextFormField(controllerEmail, Icons.mail, 'Email', null,
+                    null, TextInputType.emailAddress),
+                createTextFormField(controllerMessage, Icons.message, 'Message',
+                    250, 7, TextInputType.multiline),
+              ],
+            ),
           ),
-          const SizedBox(height: 20),
-          createTextFormField(
-              controllerMessage, 'Message', 250, 7, TextInputType.text),
-          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
+              FocusScope.of(context).unfocus();
               // Validate returns true if the form is valid, or false otherwise.
               if (_formKey.currentState!.validate()) {
                 // If the form is valid, display a snackbar. In the real world,
@@ -152,17 +178,16 @@ class ContactFormState extends State<ContactForm> {
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
-              minimumSize: const Size(1020, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50), // <-- Radius
-              ),
+              elevation: 10,
+              padding: const EdgeInsets.all(50),
+              shape: const CircleBorder(),
             ),
-            child: Text(
-              'SEND',
-              style: TextStyle(
-                  fontWeight: FontWeight.w900, color: myTheme.primaryColor),
+            child: Icon(
+              Icons.send_rounded,
+              color: myTheme.primaryColor,
             ),
           ),
+          const SizedBox(height: 50)
         ],
       ),
     );
